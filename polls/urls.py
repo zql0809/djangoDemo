@@ -1,6 +1,7 @@
-from django.urls import  path
+from django.urls import path
 from . import views
 
 urlpatterns=[
-    path('adsa/aa',views.helloWorld,name="hello")
+    path('hello/wrold', views.helloWorld, name="hello"),
+    path('index' ,views.index, name="index")
 ]

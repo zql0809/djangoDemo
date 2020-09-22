@@ -1,3 +1,44 @@
-adsadAaAS
-this is zql1
-dasds DEMO
+this is a readme document
+tips
+2020-09-22
+pip 不能下载东西
+windows + R %appdata% 跳转默认windows路径
+添加pip文件夹  添加 pip.ini
+[global]
+time-out=60
+index-url=https://pypi.tuna.tsinghua.edu.cn/simple/
+[install]
+trusted-host=tsinghua.edu.cn
+
+python -m django --version 版本 import django   print(django.get_version())
+当你的pip安装的mysql插件版本有误时
+import pymysql
+pymysql.version_info = (1, 3, 13, "final", 0)  根据不同的报错 修改这里的版本信息
+pymysql.install_as_MySQLdb()
+
+数据库配置主工程中
+'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangoTest',
+        'HOST':'127.0.0.1',
+        'PORT':3306,
+        'USER':'root',
+        'PASSWORD':'zql123456'
+
+数据迁移  - 前提就是你的setting配置有数据库源  这里用的是mysql
+生成index的数据库配置  python manage.py makemigrations polls
+检查sql数据库 python manage.py sqlmigrate polls 0001
+生成数据库信息  python manage.py migrate
+
+可以在命令行操作数据库脚本
+python manage.py shell -- 打开脚本输入框
+from apps(模块名称).models(对应数据库迁移的 py文件) import 导入定义的数据库表
+就可以直接使用其对象了
+例如当前工程中的Question.objects.all() 查询所有
+可以新建一个对象
+q = Question(columnsA="",....,columnsB="") 列出对应字段
+q.save() 保存进数据库
+q.字段 查询对应字段 等操作
+
+Question.objects.get(传入查询的map字典)
+exit() 退出
+
