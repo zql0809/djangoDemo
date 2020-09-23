@@ -42,3 +42,19 @@ q.字段 查询对应字段 等操作
 Question.objects.get(传入查询的map字典)
 exit() 退出
 
+密码重置
+tools-> python console打开 控制面板
+from django.contrib.auth.models import User获得当前用户
+然后得到超级管理员
+user.set_password("zql123456")
+user.save()
+重新设置密码
+
+配置django断点调试
+RUN -> EDIT CONFIGURATIONS -> 添加python运行.exe
+然后编辑debug 输入script path :E:\djangoWeb\mysiteDemo\manage.py ->项目的manage.py所在
+输入指令 runserver
+
+替代前端html的硬编码形式访问后端接口
+<a href = "/polls/xxx/"></a>
+<a href = "{url 'polls:<这里填写path的name属性>' 路径参数}"></a>
