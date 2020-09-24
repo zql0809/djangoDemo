@@ -8,5 +8,7 @@ urlpatterns=[
     # path('' ,views.index, name="index"),
     path('index/<int:num>' ,views.index2, name="index2"),
     path('<int:question_id>', views.detail, name="detail"),
-    path('index2/<int:question_id>', views.detail2, name="detail2")
+    path('index2/<int:question_id>', views.detail2, name="detail2"),
+    path('vote/<int:question_id>',views.vote, name="vote"),
+    path('<int:question_id>/results',views.results, name="results")
 ]
