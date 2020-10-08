@@ -1,11 +1,126 @@
-{% if latest_question_list %}
+<html>
+{# 引入样式 引入static #}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
+<script src='{% static "polls/bootstrap-3.3.7-dist/js/jquery.min.js" %}'></script>
+<script src="{% static "polls/bootstrap-3.3.7-dist/js/underscore.js" %}"></script>
+<script src="{% static "polls/bootstrap-3.3.7-dist/js/bootstrap.min.js" %}"></script>
+{# 定义html模板 #}
+<head>
+    <script>
+        $("#mobile-nav-taggle").click(function () {
+            var mobileMenu = $("#mobile-menu");
+            if (mobileMenu.hasClass("show-nav")) {
+                setTimeout(function () {
+                    mobileMenu.addClass("hide-nav").removeClass("show-nav");
+                }, 100)
+            }
+            else {
+                setTimeout(function (){
+                    mobileMenu.addClass("show-nav").removeClass("hide-nav");
+                }, 100)
+            }
+        })
+        window.onload = function () {
+                var banner=document.getElementById('myCarousel');
+                var timer=null;
+                //设置自动播放函数
+                function autoPlay () {
+                   changeImg();
+                }
+                // 鼠标划过整个容器时停止自动播放
+                banner.onmouseover = function () {
+                   clearInterval(timer);
+                }
+                // 鼠标离开整个容器时继续播放至下一张
+                banner.onmouseout=function(){
+                   timer=setInterval(autoPlay,5000);
+                }
+                // 定义并调用自动播放函数
+                timer = setInterval(autoPlay, 5000);
+                // 接着定义图片的切换函数
+                // 定义图片切换函数
+                function changeImg () {
+                    // IE
+                    if (document.all) {
+                        document.getElementById("myCarousela").click();
+                    }
+                    // 其它浏览器
+                    else {
+                        var e = document.createEvent("MouseEvents");
+                        e.initEvent("click", true, true);
+                        document.getElementById("myCarousela").dispatchEvent(e);
+                    }
+                }
+            }
+    </script>
+</head>
+
+<body>
+<div id="mobile-menu" class="mobile-nav visible-xs visible-sm">
     <ul>
-    {% for question in latest_question_list %}
-{#        <li><a href="/polls/{{ question.id }}">{{ question.question_text }}</a></li>#}
-{#        上面的定义路径是硬编码形式定义question的详情detail 若使用name进行定义 以后替换路径就只需要替换url.py  #}
-        <li><a href="{% url 'polls:detail2' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+            <li><a href="#">首页</a></li>
+            <li><a href="#">Java</a></li>
+            <li><a href="#">SVN</a></li>
+            <li><a href="#">iOS</a></li>
+        </ul>
+</div>
+
+<!--pc导航栏-->
+    <nav class="navbar-inverse visible-lg visible-md" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">团子家园</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url 'polls:list' %}">投票试验</a></li>
+                    <li><a href="#">EXCEL</a></li>
+                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">联系</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--手机导航栏侧滑-->
+    <div class="nav-btn visible-xs visible-sm">
+        <a href="#" class="mobile-nav-taggle" id="mobile-nav-taggle">
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </a>
+    </div>
+
+
+<div id="myCarousel" class="carousel slide">
+	<!-- 轮播（Carousel）指标 -->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<!-- 轮播（Carousel）项目 -->
+	<div class="carousel-inner" style="width: 68%" id="img-list">
+		<div class="item active">
+			<img src="{% static "polls/images/2.jpg" %}" alt="FIRST slide">
+		</div>
+		<div class="item">
+			<img src="{% static "polls/images/3.jpg" %}" alt="SECOND slide">
+		</div>
+		<div class="item">
+			<img src="{% static "polls/images/5.jpg" %}" alt="THREE slide">
+		</div>
+	</div>
+	<!-- 轮播（Carousel）导航 -->
+	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+
+	<a id="myCarousela" class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
+
+</body>
+</html>

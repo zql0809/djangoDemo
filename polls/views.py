@@ -34,6 +34,8 @@ def detail2(request,question_id):
     question = get_object_or_404(Question,pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
 
+
+# 实际某些操作的action方法
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -51,10 +53,33 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.  302跳转
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-
+#
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
 
-def helloWorld(request):
-    return HttpResponse("python study");
+# 重构上面的方法 2020-09-25 每个实体都会有getDetail getList
+from django.views import generic
+
+# 公共列表方法
+class IndexView(generic.ListView):
+    template_name = "polls/list.html"  # 需要跳转的页面配置
+    context_object_name = "latest_question_list" # 送到页面的参数map
+
+    def get_queryset(self):
+        """Return the last five published questions. 返回的展示数据"""
+        return Question.objects.order_by('-pub_date')[:5]
+
+# 公共详细页面
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/detail.html'
+
+# 公共投票结果页面
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
+
+# 首页
+def index(request):
+    return render(request,'polls/index.html');

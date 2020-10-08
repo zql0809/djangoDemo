@@ -60,3 +60,8 @@ RUN -> EDIT CONFIGURATIONS -> 添加python运行.exe
 <a href = "{url 'polls:<这里填写path的name属性>' 路径参数}"></a>
 在这应用的urls.py加一个app_name="polls" 命名空间,才能在上面的index.html的路径访问到页面
 
+开发
+1.可以直接使用django自带的模块进行简便开发 当不满足你自己的需求的时候再对类中方法进行复写
+例如每个功能模块必不可少的 detail查询  list查询之类的直接就可以用views模块的generic
+2.使用model定义数据库相关操作
+3.定义包名最好区分开  不然工程大了文件很难找

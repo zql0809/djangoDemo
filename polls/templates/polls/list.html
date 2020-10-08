@@ -1,0 +1,27 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+{% if latest_question_list %}
+<section class="page-section" id="services">
+            <div class="container">
+                <h2 class="text-center mt-0">At Your Service</h2>
+                <hr class="divider my-4" />
+                <div class="row">
+{% for question in latest_question_list %}
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <i class="fas fa-4x fa-gem text-primary mb-4"></i>
+                    <h3 class="h4 mb-2">hhh</h3>
+                    <p class="text-muted mb-0"><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></p>
+                </div>
+            </div>
+{% endfor %}
+                </div></div>
+</section>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% endblock %}
+
+
+<!-- Services-->

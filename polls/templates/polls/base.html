@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/styleBase.css' %}">
+    <title>vote for your immotion</title>
+</head>
+<body>
+{% include 'polls/head.html' %}
+
+{# 中间就放不同的结果 content#}
+{% block content %}
+    <div>这是基础页面的默认展示信息  若继承的页面没有定义block content的话就会显示这个</div>
+{% endblock %}
+
+{% include 'polls/footer.html' %}
+</body>
+</html>
